@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0}
+li{ list-style:none}
+body{ background:#000}
+.wrap{ margin-top:200px;height:auto; transform-style:preserve-3d; perspective-origin:center 200%; perspective:1500px; display:-webkit-box; -webkit-box-pack:center; }
+.wrap ul{ position:relative; transform-style:preserve-3d; margin:0 20px; transform-origin:center center -50px;transition: linear 0.9s}
+/*.wrap ul:nth-of-type(1):hover{ transform:rotateX(-360deg); }*/
+.wrap ul li{ width:100px; height:100px; border: 1px #CC00FF solid; font:30px/100px "黑体"; font-weight:bold; color:rgb(239,239,239); text-align:center; text-shadow:0 0 10px #CC33CC}
+.wrap ul li:nth-of-type(4){ position:absolute;top:100px; left:0; transform-origin:top; transform:rotateX(-90deg)}
+.wrap ul li:nth-of-type(2){ position:absolute;top:-100px; left:0; transform-origin:bottom ;transform:rotateX(90deg)}
+.wrap ul li:nth-of-type(3){ position:absolute;top:0; left:0; transform-origin:bottom ;transform:translateZ(-100px)}
+</style>
+<script>
+window.onload=function(){
+	function toStr(num){
+		if(num<10){
+			return '0'+num	
+		}else{
+			return ''+num	
+		}
+	}
+	
+	var oWrap=document.querySelector('.wrap')
+	var aUl=oWrap.querySelectorAll('ul')
+	
+	var time1=new Date()
+	var nowDate=toStr(time1.getHours())+toStr(time1.getMinutes())+toStr(time1.getSeconds())
+	
+	for(var i=0;i<aUl.length;i++){
+		var aLi=aUl[i].getElementsByTagName("li")
+		aLi[0].innerHTML=nowDate[i]
+		for(var j=1;j<aLi.length;j++){
+			var n=parseInt(nowDate[i])
+			if(n<9){
+				n+=1
+			}else{
+				n=0	
+			}
+			aLi[j].innerHTML=n
+		}		
+		
+	}
+	function toChange(){
+		var time2=new Date()
+		var nextDate=toStr(time2.getHours())+toStr(time2.getMinutes())+toStr(time2.getSeconds())
+		toCom(nowDate,nextDate)
+		nowDate=nextDate
+		console.log(nowDate)
+	}
+	function toCom(num1,num2){
+		
+		for(var i=0;i<num1.length;i++){
+			if(num1.charAt(i)!=num2.charAt(i)){
+				aUl[i].style.transform='rotateX(-90deg)'
+					
+			}
+		}
+		
+	}  
+	setInterval(toChange,1000)
+}
+</script>
+</head>
+
+<body >
+<div class="wrap">
+	<ul>
+    	<li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>	
+    <ul>
+    	<li>1</li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>	
+    <ul>
+    	<li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>	
+    <ul>
+    	<li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>	
+    <ul>
+    	<li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>	
+    <ul>
+    	<li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>	
+</div>
+</body>
+</html>
